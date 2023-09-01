@@ -23,7 +23,6 @@ function Catalog() {
             <ProductCard />
             <ProductCard />
           </div>
-
           <Pagination />
         </section>
       </main>

@@ -1,10 +1,13 @@
 import "./styles.css";
 
-function ProductCategory() {
+type Props = {
+  name: string;
+};
+
+function ProductCategory({ name }: Props) {
   return (
     <>
-      <div className="dsc-category">Eletrônicos</div>
-      <div className="dsc-category">Computadores</div>
+      <div className="dsc-category">{name}</div>
     </>
   );
 }
