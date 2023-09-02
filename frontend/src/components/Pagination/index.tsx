@@ -1,11 +1,13 @@
-import './styles.css';
+import "./styles.css";
 
-function Pagination(){
-    return(
-        <>
-            <div className="dsc-btn-next-page">Carregar mais</div>
-        </>
-    );
+type Props = {
+  name: string;
+};
+
+function Pagination({ name }: Props) {
+  return (
+      <div className="dsc-btn-next-page">{name}</div>
+  );
 }
 
 export default Pagination;
