@@ -1,6 +1,5 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProductDetails from "./routes/ClientHome/ProductDetails";
-import NotFound from "./components/NotFound";
 import ClientHome from "./routes/ClientHome";
 import Catalog from "./routes/ClientHome/Catalog";
 
@@ -8,12 +7,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<ClientHome />}>
+         <Route path="/" element={<ClientHome />}>
           <Route index element={<Catalog />}/>
-          <Route path="/catalog" element={<Catalog />}/>
-          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="catalog" element={<Catalog />}/>
+          <Route path="catalog/product/:id" element={<ProductDetails />} />
+          <Route path="product/:id" element={<ProductDetails />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );
