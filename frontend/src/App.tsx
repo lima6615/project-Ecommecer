@@ -3,21 +3,29 @@ import ProductDetails from "./routes/ClientHome/ProductDetails";
 import ClientHome from "./routes/ClientHome";
 import Catalog from "./routes/ClientHome/Catalog";
 import Cart from "./routes/ClientHome/Cart";
+import { useState } from "react";
+import { ContextCartCount } from "./utils/context-cart";
 
 function App() {
+  const [contextCartCount, setContextCartCount] = useState<number>(0);
+
   return (
-    <BrowserRouter>
-      <Routes>
-         <Route path="/" element={<ClientHome />}>
-          <Route index element={<Catalog />}/>
-          <Route path="catalog" element={<Catalog />}/>
-          <Route path="catalog/product/:id" element={<ProductDetails />} />
-          <Route path="product/:id" element={<ProductDetails />}> </Route>
-          <Route path="cart" element={<Cart />}></Route>
-        </Route>
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
+    <ContextCartCount.Provider value={{contextCartCount, setContextCartCount}}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ClientHome />}>
+            <Route index element={<Catalog />} />
+            <Route path="catalog" element={<Catalog />} />
+            <Route path="catalog/product/:id" element={<ProductDetails />} />
+            <Route path="product/:id" element={<ProductDetails />}>
+              {" "}
+            </Route>
+            <Route path="cart" element={<Cart />}></Route>
+          </Route>
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
+    </ContextCartCount.Provider>
   );
 }
 

@@ -1,17 +1,20 @@
 import "./styles.css";
 import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonPrimary from "../../../components/ButtonPrimary";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import * as cartService from "../../../services/cart-service";
 import { OrderDTO } from "../../../models/Order";
+import { ContextCartCount } from "../../../utils/context-cart";
 
 function Cart() {
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
 
+  const {setContextCartCount} = useContext(ContextCartCount);
+
 function hadleOnClick(){
   cartService.cartClean();
-  setCart(cartService.getCart());
+  updateCart();
 }
 
 function hadleIncreaseItem(productId: number){
@@ -21,7 +24,13 @@ function hadleIncreaseItem(productId: number){
 
 function hadleDecriseItem(productId: number){
   cartService.decreaseItem(productId);
-  setCart(cartService.getCart());
+  updateCart();
+}
+
+function updateCart(){
+  const newCart = cartService.getCart(); 
+  setCart(newCart);
+  setContextCartCount(newCart.items.length);
 }
 
   return (
