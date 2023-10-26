@@ -71,7 +71,9 @@ function updateCart(){
         )}
 
         <div className="dsc-btn-page-container">
-          <ButtonPrimary name="Finalizar pedido" />
+          <Link to="/login">
+            <ButtonPrimary name="Finalizar pedido" />
+          </Link>
           <Link to="/">
             <ButtonInverse name="Continuar comprando" />
           </Link>
