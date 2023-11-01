@@ -80,11 +80,6 @@ main {
 /*-----------------------------------------------------------------*/
 /* header styles */
 
-.dsc-header-admin {
-  background-color: var(--dsc-color-bg-quaternary);
-  color: var(--dsc-color-font-tertiary);
-}
-
 header {
   height: 70px;
   display: flex;
