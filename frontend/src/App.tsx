@@ -15,6 +15,9 @@ import { AccessTokenPayloadDTO } from "./models/auth";
 import { ContextToken } from "./utils/context-token";
 import * as authService from "./services/auth-service";
 import * as cartService from "./services/cart-service";
+import Confirmation from "./components/Confirmation";
+import ProductsListing from "./routes/Admin/ProductsListing";
+import ProductForm from "./routes/Admin/ProductForm";
 
 function App() {
 
@@ -45,9 +48,13 @@ function App() {
               <Route path="product/:id" element={<ProductDetails />} />
               <Route path="cart" element={<Cart />}></Route>
               <Route path="login" element={<Login />}></Route>
+              <Route path="confirmation/:orderId" element={<PrivateRoute><Confirmation /></PrivateRoute>} />
             </Route>
             <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin/></PrivateRoute>}> 
-              <Route index element={<AdminHome />} />
+              <Route index element={<Navigate to={"/admin/home"} />} />
+              <Route path="home" element={<AdminHome />} />
+              <Route path="products" element={<ProductsListing />} />
+              <Route path="product/:id" element={<ProductForm />} />
             </Route>
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
