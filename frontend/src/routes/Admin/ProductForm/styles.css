@@ -1,0 +1,30 @@
+
+#product-form-section {
+    padding: 20px 0;
+}
+
+.dsc-product-form-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+}
+
+.dsc-product-form-controls-container {
+    display: grid;
+    grid-gap: 20px;
+    margin: 20px;
+    width: 100%;
+}
+
+.dsc-product-form-buttons {
+    display: grid;
+    grid-gap: 20px;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+}
+
+@media (min-width: 576px){
+    #product-form-section {
+        padding: 40px 0;
+    }
+}

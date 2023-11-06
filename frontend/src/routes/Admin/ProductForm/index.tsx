@@ -1,7 +1,54 @@
-function ProductForm(){
-    return(
-        <h1>Product Form</h1>
-    );
+import './styles.css';
+
+function ProductForm() {
+
+  return (
+    <section id="product-form-section" className="dsc-container">
+      <div className="dsc-product-form-container">
+        <form className="dsc-card dsc-form">
+          <h2>Dados do produto</h2>
+          <div className="dsc-product-form-controls-container">
+            <div>
+              <input type="text" placeholder="Nome" className="dsc-form-control" />
+            </div>
+            <div>
+              <input type="text" placeholder="Preço" className="dsc-form-control" />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Imagem"
+                className="dsc-form-control"
+              />
+            </div>
+            <div>
+              <select className="dsc-form-control dsc-select" required>
+                <option value="" disabled selected>
+                  Categorias
+                </option>
+                <option value="1">Value 1</option>
+                <option value="2">Value 2</option>
+              </select>
+            </div>
+            <div>
+              <textarea
+                className="dsc-form-control dsc-textarea"
+                placeholder="Descrição"
+              ></textarea>
+            </div>
+          </div>
+          <div className="dsc-product-form-buttons">
+            <button type="reset" className="dsc-btn dsc-btn-white">
+              Cancelar
+            </button>
+            <button type="submit" className="dsc-btn dsc-btn-blue">
+              Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  );
 }
 
 export default ProductForm;
