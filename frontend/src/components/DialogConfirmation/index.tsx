@@ -4,19 +4,20 @@ import ButtonPrimary from "../ButtonPrimary";
 
 
 type Props = {
+    id: number;
     message: string;
     onDialogAnswer: Function;
 }
-function DialogConfirmation({message, onDialogAnswer} : Props){
+function DialogConfirmation({id, message, onDialogAnswer} : Props){
     return(
-        <div className="dsc-dialog-backgroud" onClick={() => onDialogAnswer(false)}>
+        <div className="dsc-dialog-backgroud" onClick={() => onDialogAnswer(false, id)}>
             <div className="dsc-dialog-box" onClick={(event) => event.stopPropagation()}>
                 <h2>{message}</h2>
                 <div className="dsc-dialog-btn-container">
-                    <div onClick={() => onDialogAnswer(false)}>
+                    <div onClick={() => onDialogAnswer(false, id)}>
                         <ButtonInverse name="Não" />    
                     </div>
-                   <div onClick={() => onDialogAnswer(true)}>
+                   <div onClick={() => onDialogAnswer(true, id)}>
                         <ButtonPrimary name="Sim" />
                    </div>
                 </div>

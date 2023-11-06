@@ -17,11 +17,12 @@ function ProductsListing() {
 
   const [dialogInfoData, setDialogInfoData] = useState({
      visiable: false,
-     message: "Operação com Sucesso!"
+     message: ""
   })
 
   const [dialogConfirmationData, setDialogConfirmationData] = useState({
     visiable: false,
+    id: 0,
     message: "Tem certeza ?"
  })
 
@@ -58,12 +59,30 @@ function ProductsListing() {
     setDialogInfoData({...dialogInfoData, visiable: false})
   }
 
-  function handleDeleteClick(){
-    setDialogConfirmationData({...dialogConfirmationData, visiable: true})
+  function handleDeleteClick(productId: number){
+    setDialogConfirmationData({...dialogConfirmationData, id: productId, visiable: true})
   }
 
-  function handleDialogConfirmationAnswer(answer: boolean){
-    console.log(answer);
+  function handleDialogConfirmationAnswer(answer: boolean, productId: number){
+
+    if(answer){
+      productService.deleteById(productId)
+      .then(() => {
+        setProducts([]);
+        setQueryParams({ ...queryParams, page: 0 });
+        setDialogInfoData({
+          visiable: true,
+          message: "Operação com Sucesso!"
+        })
+      })
+      .catch(error => {
+        setDialogInfoData({
+          visiable: true,
+          message: error.response.data.error
+        })
+      });
+    }
+
     setDialogConfirmationData({...dialogConfirmationData, visiable:false})
   }
 
@@ -103,7 +122,7 @@ function ProductsListing() {
                         <img  className="dsc-product-listing-btn" src={iditIcon} alt="Editar" />      
                     </td>
                     <td>
-                        <img onClick={handleDeleteClick} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" />
+                        <img onClick={() => handleDeleteClick(product.id)} className="dsc-product-listing-btn" src={deleteIcon} alt="Deletar" />
                     </td>
                   </tr>
               ))}
@@ -129,6 +148,7 @@ function ProductsListing() {
       {
         dialogConfirmationData.visiable &&
         <DialogConfirmation
+          id={dialogConfirmationData.id}
           message={dialogConfirmationData.message} 
           onDialogAnswer={handleDialogConfirmationAnswer}
         />
