@@ -14,7 +14,6 @@ function DialogInfo({message, onDialogClose} : Props){
                 <div className="dsc-dialog-btn-container" onClick={() => onDialogClose()}>
                     <ButtonPrimary name="OK" />
                 </div>
-               
             </div>
         </div>
     );
