@@ -2,9 +2,11 @@
 import "./styles.css";
 import { useContext, useState } from "react";
 import * as authService from "../../../services/auth-service";
+import * as forms from "../../../utils/forms";
 import { useNavigate } from "react-router-dom";
 import { ContextToken } from "../../../utils/context-token";
 import FormInput from "../../../components/FormInput/inde";
+
 
 function Login() {
   const { setContextTokenPayload } = useContext(ContextToken);
@@ -37,7 +39,7 @@ function Login() {
   function handleSubmit(event: any) {
     event.preventDefault();
     authService
-      .loginRequest({username: formData.username.value, password: formData.password.value})
+      .loginRequest(forms.toValues(formData))
       .then((response) => {
         authService.saveAccessToken(response.data.access_token);
         setContextTokenPayload(authService.getAccessTokenPayload());
@@ -49,9 +51,13 @@ function Login() {
   }
 
   function handleInputChange(event: any) {
-    const data = event.target.value;
-    const name = event.target.name;
-    setFormData({ ...formData, [name]: {...formData[name], value: data} });
+    const dataUpdated = forms.updateAndValidate(formData, event.target.name, event.target.value);
+    setFormData(dataUpdated);
+  }
+
+  function handleTurnDirty(name: string){
+      const newFormData = forms.dartyAndValidate(formData, name);
+      setFormData(newFormData);
   }
 
   return (
@@ -65,6 +71,7 @@ function Login() {
                 { ...formData.username }
                 autoComplete="false"
                 className="dsc-form-control"
+                onTurnDirty={handleTurnDirty}
                 onChange={handleInputChange}
               />
               <div className="dsc-form-error"></div>
@@ -74,6 +81,7 @@ function Login() {
                 { ...formData.password }
                 autoComplete="false"
                 className="dsc-form-control"
+                onTurnDirty={handleTurnDirty}
                 onChange={handleInputChange}
               />
             </div>
