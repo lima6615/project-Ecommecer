@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import './styles.css';
 import { useEffect, useState } from "react";
 import { OrderDTO } from "../../models/Order";
 import { Link, useParams } from "react-router-dom";
 import * as orderService from "../../services/order-service";
 import ButtonInverse from "../ButtonInverse";
+import PayPalButton from '../PayPalButton';
 
 function Confirmation() {
 
@@ -46,7 +48,7 @@ function Confirmation() {
             <h3>R$ {order?.total.toFixed(2)}</h3>
           </div>
         </div>
-
+  
         <div className="dsc-confirmation-message dsc-mb20">
           Pedido realizado! Número {order?.id}
         </div>
@@ -55,6 +57,7 @@ function Confirmation() {
             <Link to={'/'}>
                 <ButtonInverse name="Início"/>
             </Link>
+            <PayPalButton />
         </div>
       </section>
   );

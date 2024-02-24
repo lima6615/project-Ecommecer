@@ -86,7 +86,7 @@ function handlePlaceOrderClick(){
         <div className="dsc-btn-page-container">
           <Link to="/login">
             <div onClick={handlePlaceOrderClick} className="dsc-btn dsc-btn-blue">
-              Finalizar pedido
+              Realizar Comprar
             </div>
           </Link>
           <Link to="/">

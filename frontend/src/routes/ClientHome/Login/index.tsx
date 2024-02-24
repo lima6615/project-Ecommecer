@@ -41,6 +41,7 @@ function Login() {
     authService
       .loginRequest(forms.toValues(formData))
       .then((response) => {
+        console.log(response.data)
         authService.saveAccessToken(response.data.access_token);
         setContextTokenPayload(authService.getAccessTokenPayload());
         navigate("/cart");
